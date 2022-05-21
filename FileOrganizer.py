@@ -9,24 +9,25 @@ file_extensions = {
     "Zips": [".zip", ".tgz", ".rar", ".tar"],
     "Documents": [".pdf", ".epub", ".pages", ".rtf",
                   ".docx", ".doc", ".csv", ".xlsx", ".pptx", ".html", ".css", ".doc", ".ppt", ".xls", ".txt"],
-    "InatallationFiles": [".dmg", ".pkg"],
+    "InstallationFiles": [".dmg", ".pkg"],
     "Projects/PythonScripts": [".py"],
 }
 
 
 def sort_file(file_name):
-    for name, extensions in file_extensions.items():
+    for folder_name, extensions in file_extensions.items():
         for extension in extensions:
             if file_name.endswith(extension):
-                return name
+                return folder_name
 
 
 if __name__ == '__main__':
     for file in files:
-        file_destination = sort_file(file)
+        file_folder = sort_file(file)
         try:
-            if file_destination:
-                shutil.move(f'/Users/toelu/Downloads/{file}', f"/Users/toelu/Documents/{file_destination}")
+            if file_folder:
+                shutil.move(f'/Users/toelu/Downloads/{file}', f"/Users/toelu/Documents/{file_folder}")
+                print(f'{file} moved to {file_folder} folder')
             else:
                 shutil.move(f'/Users/toelu/Downloads/{file}', "/Users/toelu/Documents/Others")
         except shutil.Error:
